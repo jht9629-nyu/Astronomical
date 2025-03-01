@@ -47,7 +47,7 @@ function saveMouseXY() {
 
 // From Heavenly3D
 // prevent whole screen dragging on mobile
-function mouseDragged() {
+function mouseDragged_XXX() {
   //
   let inX = mouseX >= 0 && mouseX < width;
   let inY = mouseY >= 0 && mouseY < height;
