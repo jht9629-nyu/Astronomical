@@ -1,6 +1,8 @@
 //
+// my.canvas.mousePressed(canvas_mousePressed);
+//
 function canvas_mousePressed() {
-  // console.log('canvas_mousePressed');
+  console.log('canvas_mousePressed');
 
   if (keyIsDown(SHIFT)) {
     saveMouseXY();
@@ -15,6 +17,8 @@ function canvas_mousePressed() {
     setPane(my.pane0);
   }
   my.pane.mousePressed();
+
+  return false;
 }
 
 function canvas_mouseReleased() {
