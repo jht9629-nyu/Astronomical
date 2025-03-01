@@ -9,11 +9,13 @@ let my = {};
 
 function preload() {
   //
-  my.version = '?v=1';
+  my.version = '?v=2';
 
   let path = 'https://molab-itp.github.io/p5moLibrary/src/assets/';
   // on mobile device, switch to lower rez graphics
-  if (windowWidth <= 600) path = 'https://molab-itp.github.io/p5moLibrary/src/assets-lowrez/';
+  if (windowWidth <= 600) {
+    path = 'https://molab-itp.github.io/p5moLibrary/src/assets-lowrez/';
+  }
   console.log('path', path);
 
   my.backgImg = loadImage(path + 'The_Celestial_Zoo.png');

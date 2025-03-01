@@ -40,3 +40,25 @@ function saveMouseXY() {
 
 // !!@ no canvas mouseDragged
 // my.canvas.mouseDragged(canvas_mouseDragged);
+
+// From Heavenly3D
+// prevent whole screen dragging on mobile
+function mouseDragged() {
+  //
+  let inX = mouseX >= 0 && mouseX < width;
+  let inY = mouseY >= 0 && mouseY < height;
+  let onCanvas = inX && inY;
+  // if (onCanvas) {
+  //   if (my.shiftTracking) {
+  //     my.panX += my.panX0 - mouseX;
+  //     my.panY += my.panY0 - mouseY;
+  //     my.panX0 = mouseX;
+  //     my.panY0 = mouseY;
+  //   }
+  // }
+  // return false to allow scrolling on mobile
+  return !onCanvas;
+}
+
+// https://p5js.org/reference/p5/mouseDragged/
+// To prevent any default behavior for this event, add return false;
