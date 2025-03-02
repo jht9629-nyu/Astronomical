@@ -3,7 +3,9 @@
 // !!@ mousePressed
 // on mobile does not appear to be called
 //
-function canvas_mousePressed() {
+// function canvas_mousePressed() {
+
+function mousePressed() {
   console.log('canvas_mousePressed');
   if (keyIsDown(SHIFT)) {
     saveMouseXY();
@@ -17,10 +19,22 @@ function canvas_mousePressed() {
     setPane(my.pane0);
   }
   my.pane.mousePressed();
-  return false;
+  // return false;
 }
 
-function canvas_mouseReleased() {
+function mouseDragged() {
+  let inX = mouseX >= 0 && mouseX < width;
+  let inY = mouseY >= 0 && mouseY < height;
+  let onCanvas = inX && inY;
+  if (onCanvas) {
+    my.pane.mouseDragged();
+  }
+  // return false to allow scrolling on mobile
+  return !onCanvas;
+}
+
+// function canvas_mouseReleased() {
+function mouseReleased() {
   console.log('canvas_mouseReleased');
   if (my.shiftTracking) {
     saveMouseXY();
@@ -29,6 +43,8 @@ function canvas_mouseReleased() {
   my.mouseTracking = 0;
   my.shiftTracking = 0;
 }
+
+// --
 
 function clearMouseXY() {
   my.mouseXYs = [];

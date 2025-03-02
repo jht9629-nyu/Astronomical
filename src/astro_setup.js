@@ -1,10 +1,10 @@
 //
 function astro_setup() {
   //
-  my.version = '?v=5';
+  my.version = '?v=6';
   my.canvas = createCanvas(windowWidth, windowHeight - 90);
-  my.canvas.mousePressed(canvas_mousePressed);
-  my.canvas.mouseReleased(canvas_mouseReleased);
+  // my.canvas.mousePressed(canvas_mousePressed);
+  // my.canvas.mouseReleased(canvas_mouseReleased);
   my.width = width;
   my.height = height;
   my.paneRatio = 12 / 16;
