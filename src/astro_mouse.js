@@ -1,28 +1,27 @@
 //
 // my.canvas.mousePressed(canvas_mousePressed);
+// !!@ mousePressed
+// on mobile does not appear to be called
 //
 function canvas_mousePressed() {
   console.log('canvas_mousePressed');
-
   if (keyIsDown(SHIFT)) {
     saveMouseXY();
     my.shiftTracking = 1;
   } else {
     my.mouseTracking = 1;
   }
-
   if (my.pane1.touchPoint(mouseX, mouseY)) {
     setPane(my.pane1);
   } else if (my.pane0.touchPoint(mouseX, mouseY)) {
     setPane(my.pane0);
   }
   my.pane.mousePressed();
-
   return false;
 }
 
 function canvas_mouseReleased() {
-  // console.log('canvas_mouseReleased');
+  console.log('canvas_mouseReleased');
   if (my.shiftTracking) {
     saveMouseXY();
   }

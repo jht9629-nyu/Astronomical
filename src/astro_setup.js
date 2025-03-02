@@ -1,7 +1,7 @@
 //
 function astro_setup() {
   //
-  my.version = '?v=4';
+  my.version = '?v=5';
   my.canvas = createCanvas(windowWidth, windowHeight - 90);
   my.canvas.mousePressed(canvas_mousePressed);
   my.canvas.mouseReleased(canvas_mouseReleased);
