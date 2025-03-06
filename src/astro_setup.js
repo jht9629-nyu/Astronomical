@@ -1,7 +1,7 @@
 //
 function astro_setup() {
   //
-  my.version = '?v=9';
+  my.version = '?v=10';
   my.canvas = createCanvas(windowWidth, windowHeight - 90);
   // my.canvas.mousePressed(canvas_mousePressed);
   // my.canvas.mouseReleased(canvas_mouseReleased);
@@ -9,8 +9,8 @@ function astro_setup() {
   my.height = height;
   my.paneRatio = 12 / 16;
   // my.isPortrait = height > width;
-  // my.scanFlag = 1;
-  my.scanFlag = 0;
+  my.scanFlag = 1;
+  // my.scanFlag = 0;
 
   my.refBox = new RefBox(refBox_init);
 

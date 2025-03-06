@@ -16,14 +16,8 @@ function create_ui() {
   let href = 'https://commons.wikimedia.org/wiki/File:The_Celestial_Zoo_infographic_wikimedia.png';
   createA(href, 'Infographic listing 210 notable astronomical objects', '_blank');
 
-  createElement('br');
+  //
   if (!my.mobileScreen) {
-    my.scanFlagChk = createCheckbox('run', my.scanFlag).changed(function () {
-      my.scanFlag = this.checked();
-      run_action();
-    });
-    my.scanFlagChk.style('display:inline');
-    //
     createButton('zero').mousePressed(function () {
       my.pane.pan_init();
     });
@@ -33,16 +27,6 @@ function create_ui() {
     createButton('clear').mousePressed(function () {
       clearMouseXY();
     });
-  }
-  {
-    my.zoom_slider = createSlider(1, 32, my.pane.zoomIndex, 0.01).input(function () {
-      clearMouseXY();
-      my.pane.pan_updateZoom(this.value());
-    });
-    my.zoom_slider.style('width:500px');
-  }
-  if (my.mobileScreen) {
-    // my.zoom_slider.hide();
   }
   createElement('br');
   {
@@ -86,6 +70,23 @@ function create_ui() {
       });
     my.refLabel_input.size(180);
   }
+  createElement('br');
+  my.scanFlagChk = createCheckbox('run', my.scanFlag).changed(function () {
+    my.scanFlag = this.checked();
+    run_action();
+  });
+  my.scanFlagChk.style('display:inline');
+  {
+    my.zoom_slider = createSlider(1, 32, my.pane.zoomIndex, 0.01).input(function () {
+      clearMouseXY();
+      my.pane.pan_updateZoom(this.value());
+    });
+    my.zoom_slider.style('width:500px');
+  }
+  if (my.mobileScreen) {
+    // my.zoom_slider.hide();
+  }
+
   if (!my.mobileScreen) {
     createButton('download').mousePressed(function () {
       downloadAction();
