@@ -9,12 +9,13 @@ let my = {};
 
 function preload() {
   //
-  my.version = '?v=7';
+  my.version = '?v=9';
 
   let path = 'https://molab-itp.github.io/p5moLibrary/src/assets/';
   // on mobile device, switch to lower rez graphics
   if (windowWidth <= 600) {
     path = 'https://molab-itp.github.io/p5moLibrary/src/assets-lowrez/';
+    my.mobileScreen = 1;
   }
   console.log('path', path);
 
@@ -40,7 +41,7 @@ function setup() {
 function draw() {
   //
   background(0);
-  my.pane1.render();
+  if (my.pane1) my.pane1.render();
   my.pane0.render();
   create_ui_update();
   // if (my.mouseTracking) {
@@ -101,3 +102,5 @@ function draw_crossHairs() {
 // features are included for each astronomical object
 
 // https://en.wikipedia.org/wiki/Astronomical_object
+
+// https://pablocarlosbudassi.com/2021/02/the-celestial-zoo-celestial-zoo-tour-of.html

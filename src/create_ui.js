@@ -1,37 +1,48 @@
 //
 function create_ui() {
   //
-  createSpan(my.version.substring(1));
-  createSpan().id('id_panX');
-  createSpan().id('id_panY');
-  createSpan().id('id_zoom');
-  createElement('br');
-  my.scanFlagChk = createCheckbox('run', my.scanFlag).changed(function () {
-    my.scanFlag = this.checked();
-    my.animLoop.loop = my.scanFlag;
-    my.animLoop.running = my.scanFlag;
-    if (my.scanFlag) {
-      my.animLoop.restart();
-    }
-    focusAction();
-  });
-  my.scanFlagChk.style('display:inline');
+  createSpan(my.version);
+  if (!my.mobileScreen) {
+    // createSpan(my.version.substring(1));
+    createSpan().id('id_panX');
+    createSpan().id('id_panY');
+    createSpan().id('id_zoom');
+    createButton('full screen').mousePressed(function () {
+      my.scanFlag = true;
+      run_action();
+      ui_toggleFullScreen();
+    });
+  }
+  let href = 'https://commons.wikimedia.org/wiki/File:The_Celestial_Zoo_infographic_wikimedia.png';
+  createA(href, 'Infographic listing 210 notable astronomical objects', '_blank');
 
-  createButton('zero').mousePressed(function () {
-    my.pane.pan_init();
-  });
-  createButton('center').mousePressed(function () {
-    my.pane.pan_center();
-  });
-  createButton('clear').mousePressed(function () {
-    clearMouseXY();
-  });
+  createElement('br');
+  if (!my.mobileScreen) {
+    my.scanFlagChk = createCheckbox('run', my.scanFlag).changed(function () {
+      my.scanFlag = this.checked();
+      run_action();
+    });
+    my.scanFlagChk.style('display:inline');
+    //
+    createButton('zero').mousePressed(function () {
+      my.pane.pan_init();
+    });
+    createButton('center').mousePressed(function () {
+      my.pane.pan_center();
+    });
+    createButton('clear').mousePressed(function () {
+      clearMouseXY();
+    });
+  }
   {
     my.zoom_slider = createSlider(1, 32, my.pane.zoomIndex, 0.01).input(function () {
       clearMouseXY();
       my.pane.pan_updateZoom(this.value());
     });
     my.zoom_slider.style('width:500px');
+  }
+  if (my.mobileScreen) {
+    // my.zoom_slider.hide();
   }
   createElement('br');
   {
@@ -41,11 +52,8 @@ function create_ui() {
         // console.log('id_refIndex', this.value());
         my.refBox.refIndex = parseFloat(this.value()) - 1;
       });
-    my.refIndex_input.size(30);
+    my.refIndex_input.size(50);
   }
-  createButton('Add').mousePressed(function () {
-    addAction();
-  });
   createButton('←').mousePressed(function () {
     my.animLoop.restart();
     previousRefAction();
@@ -54,16 +62,21 @@ function create_ui() {
     my.animLoop.restart();
     nextRefAction();
   });
-  createButton('focus').mousePressed(function () {
-    my.animLoop.restart();
-    focusAction();
-  });
-  createButton('update').mousePressed(function () {
-    updateAction();
-  });
-  createButton('delete').mousePressed(function () {
-    deleteAction();
-  });
+  if (!my.mobileScreen) {
+    createButton('focus').mousePressed(function () {
+      my.animLoop.restart();
+      focusAction();
+    });
+    createButton('Add').mousePressed(function () {
+      addAction();
+    });
+    createButton('update').mousePressed(function () {
+      updateAction();
+    });
+    createButton('delete').mousePressed(function () {
+      deleteAction();
+    });
+  }
   {
     my.refLabel_input = createInput('' + my.refBox.refLabel)
       .id('id_refLabel')
@@ -73,23 +86,17 @@ function create_ui() {
       });
     my.refLabel_input.size(180);
   }
-  createButton('download').mousePressed(function () {
-    downloadAction();
-  });
-  createButton('random').mousePressed(function () {
-    randomAction();
-  });
+  if (!my.mobileScreen) {
+    createButton('download').mousePressed(function () {
+      downloadAction();
+    });
+    createButton('random').mousePressed(function () {
+      randomAction();
+    });
+  }
   {
     my.refEntryReport_div = createDiv().id('id_refReport');
   }
-}
-
-function addAction0() {
-  let n = my.refBox.refs.length;
-  my.refBox.refIndex = n;
-  my.refIndex_input.value(my.refBox.refIndex + 1);
-  my.refLabel_input.value(my.refBox.refLabel);
-  ui_paneUpdate();
 }
 
 function addAction() {
@@ -102,9 +109,6 @@ function addAction() {
     my.refBox.refs.splice(my.refBox.refIndex + 1, 0, 0);
     nextRefAction();
   }
-  // my.refIndex_input.value(my.refBox.refIndex + 1);
-  // my.refLabel_input.value(my.refBox.refLabel);
-  // ui_paneUpdate();
   refIndexSync();
 }
 
@@ -114,12 +118,19 @@ function deleteAction() {
   my.refBox.refs.splice(my.refBox.refIndex, 1);
   if (my.refBox.refIndex + 1 == n) {
     my.refBox.refIndex = my.refBox.refs.length - 1;
-    // my.refIndex_input.value(my.refBox.refIndex + 1);
-    // my.refLabel_input.value(my.refBox.refLabel);
     refIndexSync();
   }
   focusAction();
   // ui_paneUpdate();
+}
+
+function run_action() {
+  my.animLoop.loop = my.scanFlag;
+  my.animLoop.running = my.scanFlag;
+  if (my.scanFlag) {
+    my.animLoop.restart();
+  }
+  focusAction();
 }
 
 function downloadAction() {
@@ -130,10 +141,10 @@ function downloadAction() {
 function focusAction() {
   clearMouseXY();
   if (my.scanFlag) {
-    my.pane1.focus_animated();
+    if (my.pane1) my.pane1.focus_animated();
     my.pane0.focus_animated();
   } else {
-    my.pane1.focus();
+    if (my.pane1) my.pane1.focus();
     my.pane0.focus();
   }
 }
@@ -163,6 +174,7 @@ function previousRefAction() {
   } else {
     refAdjustDelta(-1);
   }
+  if (my.mobileScreen) focusAction();
 }
 
 function nextRefAction() {
@@ -175,6 +187,7 @@ function nextRefAction() {
     // Advance to next ref
     refAdjustDelta(1);
   }
+  if (my.mobileScreen) focusAction();
 }
 
 function refIndexAssign(index) {
@@ -186,7 +199,7 @@ function refIndexSync() {
   my.refIndex_input.value(my.refBox.refIndex + 1);
   my.refLabel_input.value(my.refBox.refLabel);
   ui_paneUpdate();
-  if (my.pane0.region().z && my.pane1.region().z) {
+  if (my.pane0.region().z && my.pane1 && my.pane1.region().z) {
     focusAction();
   }
 }
@@ -207,7 +220,7 @@ function create_ui_update() {
   let pane = my.pane;
 
   let panX = pane.panX.toFixed(1);
-  select('#id_panX').html('[panX=' + panX + '] ');
+  select('#id_panX').html(' [panX=' + panX + '] ');
 
   let panY = pane.panY.toFixed(1);
   select('#id_panY').html('[panY=' + panY + '] ');
