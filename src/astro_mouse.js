@@ -26,7 +26,7 @@ function mouseDragged() {
   let inX = mouseX >= 0 && mouseX < width;
   let inY = mouseY >= 0 && mouseY < height;
   let onCanvas = inX && inY;
-  if (onCanvas) {
+  if (onCanvas && !my.shiftTracking) {
     my.pane.mouseDragged();
   }
   // return false to allow scrolling on mobile

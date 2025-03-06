@@ -9,7 +9,8 @@ function astro_setup() {
   my.height = height;
   my.paneRatio = 12 / 16;
   // my.isPortrait = height > width;
-  my.scanFlag = 1;
+  // my.scanFlag = 1;
+  my.scanFlag = 0;
 
   my.refBox = new RefBox(refBox_init);
 
@@ -19,12 +20,14 @@ function astro_setup() {
 
   my.pane = my.pane1;
 
-  ui_init();
+  create_ui();
 
   focusAction();
 
   my.cycleCount = 1;
 }
+
+let centered_focus = 1;
 
 function create_pane0() {
   let fwidth = my.width;
@@ -34,6 +37,7 @@ function create_pane0() {
   let x0 = 0;
   let y0 = 0;
   let z0 = 8;
+  // let z0 = 20;
   let width = floor(fwidth * rr);
   let refBox = my.refBox;
   if (my.isPortrait) {
@@ -43,8 +47,8 @@ function create_pane0() {
     // y0 = my.height - height;
   }
   let regionIndex = 0;
-  let backgImg = backImage;
-  my.pane0 = new Pane({ backgImg, backImage, x0, y0, z0, width, height, refBox, regionIndex });
+  // let centered_focus = 1;
+  my.pane0 = new Pane({ backImage, x0, y0, z0, width, height, refBox, regionIndex, centered_focus });
 }
 
 function create_pane1() {
@@ -55,6 +59,7 @@ function create_pane1() {
   let x0 = floor(fwidth * (1 - rr));
   let y0 = 0;
   let z0 = 4.5;
+  // let z0 = 2.0;
   let initCentered = 1;
   let width = floor(fwidth * rr);
   let refBox = my.refBox;
@@ -63,6 +68,6 @@ function create_pane1() {
     x0 = 0;
   }
   let regionIndex = 1;
-  let backgImg = backImage;
-  my.pane1 = new Pane({ backgImg, backImage, x0, y0, z0, width, height, initCentered, refBox, regionIndex });
+  // let centered_focus = 1;
+  my.pane1 = new Pane({ backImage, x0, y0, z0, width, height, initCentered, refBox, regionIndex, centered_focus });
 }

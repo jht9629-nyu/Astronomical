@@ -1,5 +1,5 @@
 //
-function ui_init() {
+function create_ui() {
   //
   createSpan(my.version.substring(1));
   createSpan().id('id_panX');
@@ -61,6 +61,9 @@ function ui_init() {
   createButton('update').mousePressed(function () {
     updateAction();
   });
+  createButton('delete').mousePressed(function () {
+    deleteAction();
+  });
   {
     my.refLabel_input = createInput('' + my.refBox.refLabel)
       .id('id_refLabel')
@@ -81,12 +84,42 @@ function ui_init() {
   }
 }
 
-function addAction() {
+function addAction0() {
   let n = my.refBox.refs.length;
   my.refBox.refIndex = n;
   my.refIndex_input.value(my.refBox.refIndex + 1);
   my.refLabel_input.value(my.refBox.refLabel);
   ui_paneUpdate();
+}
+
+function addAction() {
+  let n = my.refBox.refs.length;
+  console.log('addAction n', n, 'refIndex', my.refBox.refIndex);
+  if (my.refBox.refIndex + 1 == n) {
+    my.refBox.refIndex = n;
+  } else {
+    // Insert zero to force entry init
+    my.refBox.refs.splice(my.refBox.refIndex + 1, 0, 0);
+    nextRefAction();
+  }
+  // my.refIndex_input.value(my.refBox.refIndex + 1);
+  // my.refLabel_input.value(my.refBox.refLabel);
+  // ui_paneUpdate();
+  refIndexSync();
+}
+
+function deleteAction() {
+  let n = my.refBox.refs.length;
+  console.log('deleteAction n', n, 'refIndex', my.refBox.refIndex);
+  my.refBox.refs.splice(my.refBox.refIndex, 1);
+  if (my.refBox.refIndex + 1 == n) {
+    my.refBox.refIndex = my.refBox.refs.length - 1;
+    // my.refIndex_input.value(my.refBox.refIndex + 1);
+    // my.refLabel_input.value(my.refBox.refLabel);
+    refIndexSync();
+  }
+  focusAction();
+  // ui_paneUpdate();
 }
 
 function downloadAction() {
@@ -168,7 +201,7 @@ function randomAction() {
   refIndexSync();
 }
 
-function ui_init_update() {
+function create_ui_update() {
   //
   if (!ui_present()) return;
   let pane = my.pane;
