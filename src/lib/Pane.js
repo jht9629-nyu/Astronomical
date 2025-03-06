@@ -1,7 +1,7 @@
 //
 
 export class Pane {
-  // { backgImg, x0, y0, z0, width, height, initCentered, refBox, regionIndex }
+  // { backImage, x0, y0, z0, width, height, initCentered, refBox, regionIndex }
   constructor(props) {
     //
     Object.assign(this, props);
@@ -17,7 +17,7 @@ export class Pane {
 
     this.pan_init();
 
-    console.log('?v=6 Pane initCentered', this.initCentered);
+    console.log('?v=7 Pane initCentered', this.initCentered);
     if (this.initCentered) {
       this.pan_center();
     }
@@ -30,7 +30,7 @@ export class Pane {
   render() {
     // must step values before render
     this.anim.stepValues();
-    this.render_backgImg();
+    this.render_backImage();
     if (this.anim.running) {
       // animation is running, don't touch props
       // this.focus_pan();
@@ -99,9 +99,9 @@ export class Pane {
     this.focusRect = new Rect({ x0, y0, width, height, stroke, strokeWeight, shadowBlur, shadowColor });
   }
 
-  render_backgImg() {
+  render_backImage() {
     let cm = this.canvasMap();
-    let backgImg = this.backgImg;
+    let backImage = this.backImage;
     // zoom background image to the full width of the canvas
     let dx = this.x0;
     let dy = this.y0;
@@ -109,7 +109,7 @@ export class Pane {
     let sy = this.panY;
     let bf = this.backBuffer;
     bf.clear();
-    bf.image(backgImg, 0, 0, cm.dWidth, cm.dHeight, sx, sy, cm.sWidth, cm.sHeight);
+    bf.image(backImage, 0, 0, cm.dWidth, cm.dHeight, sx, sy, cm.sWidth, cm.sHeight);
     image(bf, dx, dy, bf.width, bf.height, 0, 0, bf.width, bf.height);
   }
 
@@ -181,8 +181,8 @@ export class Pane {
     let oRatio = this.zoomRatio;
     this.zoomIndex = newValue;
 
-    let ww = this.backgImg.width;
-    let hh = this.backgImg.height;
+    let ww = this.backImage.width;
+    let hh = this.backImage.height;
 
     let oW = floor(ww * oRatio * 0.5);
     let oH = floor(hh * oRatio * 0.5);
@@ -215,9 +215,9 @@ export class Pane {
 
   // { dWidth, dHeight, sWidth, sHeight, ww, hh };
   canvasMap() {
-    let backgImg = this.backgImg;
-    let ww = backgImg.width;
-    let hh = backgImg.height;
+    let backImage = this.backImage;
+    let ww = backImage.width;
+    let hh = backImage.height;
     let rr = hh / ww;
 
     let dWidth = this.width;

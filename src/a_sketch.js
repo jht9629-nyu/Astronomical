@@ -9,7 +9,7 @@ let my = {};
 
 function preload() {
   //
-  my.version = '?v=6';
+  my.version = '?v=7';
 
   let path = 'https://molab-itp.github.io/p5moLibrary/src/assets/';
   // on mobile device, switch to lower rez graphics
@@ -18,16 +18,16 @@ function preload() {
   }
   console.log('path', path);
 
-  my.backgImg = loadImage(path + 'The_Celestial_Zoo.png');
+  my.backImage = loadImage(path + 'The_Celestial_Zoo.png');
 
-  console.log('preload my.backgImg width', my.backgImg.width, my.backgImg.height);
-  // my.backgImg width 1 1
+  console.log('preload my.backImage width', my.backImage.width, my.backImage.height);
+  // my.backImage width 1 1
 }
 
 function setup() {
   //
-  console.log('setup my.backgImg width', my.backgImg.width, my.backgImg.height);
-  // my.backgImg width 4800 3200
+  console.log('setup my.backImage width', my.backImage.width, my.backImage.height);
+  // my.backImage width 4800 3200
 
   astro_setup();
 
