@@ -17,7 +17,7 @@ export class Pane {
 
     this.pan_init();
 
-    console.log('?v=10 Pane initCentered', this.initCentered);
+    console.log('?v=11 Pane initCentered', this.initCentered);
     if (this.initCentered) {
       this.pan_center();
     }

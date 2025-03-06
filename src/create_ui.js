@@ -14,20 +14,8 @@ function create_ui() {
     });
   }
   let href = 'https://commons.wikimedia.org/wiki/File:The_Celestial_Zoo_infographic_wikimedia.png';
-  createA(href, 'Infographic listing 210 notable astronomical objects', '_blank');
+  createA(href, ' 210 Astronomical Objects ', '_blank');
 
-  //
-  if (!my.mobileScreen) {
-    createButton('zero').mousePressed(function () {
-      my.pane.pan_init();
-    });
-    createButton('center').mousePressed(function () {
-      my.pane.pan_center();
-    });
-    createButton('clear').mousePressed(function () {
-      clearMouseXY();
-    });
-  }
   createElement('br');
   {
     my.refIndex_input = createInput('' + (my.refBox.refIndex + 1))
@@ -86,7 +74,10 @@ function create_ui() {
   if (my.mobileScreen) {
     // my.zoom_slider.hide();
   }
-
+  {
+    my.refEntryReport_div = createDiv().id('id_refReport');
+  }
+  //
   if (!my.mobileScreen) {
     createButton('download').mousePressed(function () {
       downloadAction();
@@ -94,9 +85,15 @@ function create_ui() {
     createButton('random').mousePressed(function () {
       randomAction();
     });
-  }
-  {
-    my.refEntryReport_div = createDiv().id('id_refReport');
+    createButton('zero').mousePressed(function () {
+      my.pane.pan_init();
+    });
+    createButton('center').mousePressed(function () {
+      my.pane.pan_center();
+    });
+    createButton('clear').mousePressed(function () {
+      clearMouseXY();
+    });
   }
 }
 
