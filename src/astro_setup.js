@@ -8,7 +8,7 @@ function astro_setup() {
   my.width = width;
   my.height = height;
   my.paneRatio = 12 / 16;
-  my.isPortrait = height > width;
+  // my.isPortrait = height > width;
   my.scanFlag = 1;
 
   my.refBox = new RefBox(refBox_init);
