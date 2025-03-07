@@ -1,12 +1,12 @@
 //
 async function setup_dbase() {
   //
-  my.appTitle = 'mind-manju';
+  my.appTitle = 'Astronomical';
   my.dbase_rootPath = 'm0-@r-@w-';
-  my.mo_app = 'mo-manju';
-  my.mo_room = 'm1-manju';
+  my.mo_app = 'mo-astro';
+  my.mo_room = 'm1-astro';
   my.mo_group = 's0';
-  my.nameDevice = 'manju';
+  my.nameDevice = 'astro';
 
   my.fireb_config = 'jht9629';
   // my.fireb_config = 'jht1493';

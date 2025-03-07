@@ -1,19 +1,8 @@
 //
-function astro_setup() {
-  //
-  my.version = '?v=11';
-  my.canvas = createCanvas(windowWidth, windowHeight - 90);
-  // my.canvas.mousePressed(canvas_mousePressed);
-  // my.canvas.mouseReleased(canvas_mouseReleased);
-  my.width = width;
-  my.height = height;
-  my.paneRatio = 12 / 16;
-  // my.isPortrait = height > width;
-  my.scanFlag = 1;
-  // my.scanFlag = 0;
 
-  my.refBox = new RefBox(refBox_init);
+let centered_focus = 1;
 
+function create_panes() {
   create_pane0();
 
   if (my.mobileScreen) {
@@ -22,15 +11,7 @@ function astro_setup() {
     create_pane1();
     my.pane = my.pane1;
   }
-
-  create_ui();
-
-  focusAction();
-
-  my.cycleCount = 1;
 }
-
-let centered_focus = 1;
 
 function create_pane0() {
   let fwidth = my.width;

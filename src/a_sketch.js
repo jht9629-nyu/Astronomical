@@ -9,7 +9,7 @@ let my = {};
 
 function preload() {
   //
-  my.version = '?v=11';
+  my.version = '?v=12';
 
   let path = 'https://molab-itp.github.io/p5moLibrary/src/assets/';
   // on mobile device, switch to lower rez graphics
@@ -30,7 +30,7 @@ function setup() {
   console.log('setup my.backImage width', my.backImage.width, my.backImage.height);
   // my.backImage width 4800 3200
 
-  astro_setup();
+  my_setup();
 
   my.animLoop = new Anim({ target: my, time: 15 });
   if (my.scanFlag) {

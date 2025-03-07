@@ -190,6 +190,7 @@ function nextRefAction() {
 
 function refIndexAssign(index) {
   my.refBox.refIndex = index;
+  my.refBox.save_refIndex();
   refIndexSync();
 }
 
@@ -203,8 +204,8 @@ function refIndexSync() {
 }
 
 function refAdjustDelta(delta) {
-  my.refBox.refIndex += delta;
-  refIndexSync();
+  refIndexAssign(my.refBox.refIndex + delta);
+  // refIndexSync();
 }
 
 function randomAction() {
