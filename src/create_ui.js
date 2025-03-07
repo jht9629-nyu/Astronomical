@@ -241,3 +241,5 @@ function ui_present() {
 // https://editor.p5js.org/jht9629-nyu/sketches/rXhPgZ1k6
 // 2.2.3 circleX ui span coordinates xy colors rgb
 // reporting variable values, coorindates and colors
+
+// https://commons.wikimedia.org/wiki/File:The_Celestial_Zoo_infographic_wikimedia.png

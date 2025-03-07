@@ -9,7 +9,7 @@ let my = {};
 
 function preload() {
   //
-  my.version = '?v=12';
+  my.version = '?v=14';
 
   let path = 'https://molab-itp.github.io/p5moLibrary/src/assets/';
   // on mobile device, switch to lower rez graphics
@@ -41,15 +41,13 @@ function setup() {
 function draw() {
   //
   background(0);
-  if (my.pane1) my.pane1.render();
+  if (my.pane1) {
+    my.pane1.render();
+  }
   my.pane0.render();
   create_ui_update();
-  // if (my.mouseTracking) {
-  //   my.pane.mouseDragged();
-  // }
   draw_crossHairs();
   drawCycleCount();
-
   my.animLoop.step({ action: nextRefAction, loop: my.scanFlag });
 }
 
@@ -59,8 +57,9 @@ function drawCycleCount() {
   let h = floor(height * 0.025);
   let y = y0 + height - h;
   let x = x0;
+  // 00.0
   let str = Number(lapse).toFixed(1).padStart(4, '0');
-  str = str + ' ' + my.cycleCount;
+  str = str + ' (' + my.cycleCount + ')';
   fill(0);
   noStroke();
   rect(x, y, width, h);

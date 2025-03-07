@@ -1,10 +1,9 @@
 //
 function my_setup() {
   //
-  my.version = '?v=12';
-  my.canvas = createCanvas(windowWidth, windowHeight - 90);
-  // my.canvas.mousePressed(canvas_mousePressed);
-  // my.canvas.mouseReleased(canvas_mouseReleased);
+  my.version = '?v=14';
+  my.bottomMargin = 40;
+  my.canvas = createCanvas(windowWidth, windowHeight - my.bottomMargin);
   my.width = width;
   my.height = height;
   my.paneRatio = 12 / 16;
@@ -21,4 +20,26 @@ function my_setup() {
   focusAction();
 
   my.cycleCount = 1;
+}
+
+// Resize the canvas when the
+// browser's size changes.
+function windowResized() {
+  // resizeCanvas(windowWidth, windowHeight);
+  console.log('-- windowResized my.resizedTimer', my.resizedTimer);
+  // Wait a sec to avoid excessive firing
+  if (!my.resizedTimer) {
+    let period = 2.0;
+    function timer_event() {
+      // my_setup();
+      resizeCanvas(windowWidth, windowHeight - my.bottomMargin);
+      my.width = width;
+      my.height = height;
+      create_panes();
+      my.resizedTimer.clear();
+      my.resizedTimer = 0;
+    }
+    my.resizedTimer = new PeriodTimer({ period, timer_event });
+  }
+  // my_setup();
 }
