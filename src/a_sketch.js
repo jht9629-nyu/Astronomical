@@ -48,6 +48,7 @@ function draw() {
   create_ui_update();
   draw_crossHairs();
   drawCycleCount();
+  // nextRefAction will trigger focusAction
   my.animLoop.step({ action: nextRefAction, loop: my.scanFlag });
 }
 

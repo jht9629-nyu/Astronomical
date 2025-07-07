@@ -185,7 +185,9 @@ function nextRefAction() {
     // Advance to next ref
     refAdjustDelta(1);
   }
-  if (my.mobileScreen) focusAction();
+  if (my.mobileScreen) {
+    focusAction();
+  }
 }
 
 function refIndexAssign(index) {
